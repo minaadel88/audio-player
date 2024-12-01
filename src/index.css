@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+/* Custom scrollbar styles */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Layout grid */
+.app-layout {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0;
+}
+
+/* Player styles */
+.player-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: theme('colors.white');
+  border-top: 1px solid theme('colors.gray.200');
+  transition: all 0.3s ease-in-out;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.dark .player-container {
+  background: theme('colors.gray.800');
+  border-color: theme('colors.gray.700');
+}
+
+/* Main content padding to avoid player overlap */
+.main-content {
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .content-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .player-container {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  }
+
+  .main-content {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+/* Range input styling */
+input[type="range"] {
+  @apply h-1 rounded-lg appearance-none bg-gray-300 dark:bg-gray-600;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none w-3 h-3 rounded-full bg-blue-600 cursor-pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-3 h-3 rounded-full bg-blue-600 cursor-pointer border-0;
+}
+
+/* Sidebar transitions */
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+/* Video table adjustments */
+.video-table-container {
+  @apply w-full overflow-x-hidden;
+  margin-left: 4rem;
+}
+
+@screen lg {
+  .video-table-container {
+    margin-left: 16rem;
+  }
+}
